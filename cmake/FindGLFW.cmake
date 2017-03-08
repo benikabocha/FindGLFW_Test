@@ -73,6 +73,7 @@ else ()
     if (APPLE)
         find_library (GLFW_LIBRARIES
             NAMES
+                glfw
                 glfw3
             HINTS
                 "${GLFW_ROOT}/lib"
@@ -84,6 +85,7 @@ else ()
     else ()
         find_library (GLFW_LIBRARIES
             NAMES
+                glfw
                 glfw3
             HINTS
                 "${GLFW_ROOT}/lib"

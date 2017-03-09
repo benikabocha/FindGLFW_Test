@@ -6,9 +6,8 @@
 find_path (GLFW_INCLUDE_DIR
     NAMES
         GLFW/glfw3.h
-    HINTS
-        "${GLFW_ROOT}/include"
     PATHS
+        "${GLFW_ROOT}/include"
         /usr/X11R6/include
         /usr/include/X11
         /opt/graphics/OpenGL/include
@@ -25,7 +24,8 @@ if (WIN32)
         find_library (GLFW_LIBRARIES
             NAMES
                 glfw3
-            HINTS
+            PATHS
+                "${GLFW_ROOT}/lib"
                 "${GLFW_ROOT}/lib-vc2012"
             DOCS
                 "The GLFW library"
@@ -34,7 +34,8 @@ if (WIN32)
         find_library (GLFW_LIBRARIES
             NAMES
                 glfw3
-            HINTS
+            PATHS
+                "${GLFW_ROOT}/lib"
                 "${GLFW_ROOT}/lib-vc2013"
             DOCS
                 "The GLFW library"
@@ -43,7 +44,8 @@ if (WIN32)
         find_library (GLFW_LIBRARIES
             NAMES
                 glfw3
-            HINTS
+            PATHS
+                "${GLFW_ROOT}/lib"
                 "${GLFW_ROOT}/lib-vc2015"
             DOCS
                 "The GLFW library"
@@ -53,7 +55,8 @@ if (WIN32)
             find_library (GLFW_LIBRARIES
                 NAMES
                     glfw3
-                HINTS
+                PATHS
+                    "${GLFW_ROOT}/lib"
                     "${GLFW_ROOT}/lib-mingw-w64"
                 DOCS
                     "The GLFW library"
@@ -62,7 +65,8 @@ if (WIN32)
             find_library (GLFW_LIBRARIES
                 NAMES
                     glfw3
-                HINTS
+                PATHS
+                    "${GLFW_ROOT}/lib"
                     "${GLFW_ROOT}/lib-mingw"
                 DOCS
                     "The GLFW library"
@@ -70,38 +74,23 @@ if (WIN32)
         endif ()
     endif()
 else ()
-    if (APPLE)
-        find_library (GLFW_LIBRARIES
-            NAMES
-                glfw
-                glfw3
-            HINTS
-                "${GLFW_ROOT}/lib"
-            PATHS
-                /usr/local/lib
-            DOCS
-                "The GLFW library"
-        )
-    else ()
-        find_library (GLFW_LIBRARIES
-            NAMES
-                glfw
-                glfw3
-            HINTS
-                "${GLFW_ROOT}/lib"
-                "${GLFW_ROOT}/lib/x11"
-            PATHS
-                /usr/lib64
-                /usr/lib
-                /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}
-                /usr/local/lib64
-                /usr/local/lib
-                /usr/local/lib/${CMAKE_LIBRARY_ARCHITECTURE}
-                /usr/X11R6/lib
-            DOCS
-                "The GLFW library"
-        )
-    endif ()
+    find_library (GLFW_LIBRARIES
+        NAMES
+            glfw
+            glfw3
+        PATHS
+            "${GLFW_ROOT}/lib"
+            "${GLFW_ROOT}/lib/x11"
+            /usr/lib64
+            /usr/lib
+            /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}
+            /usr/local/lib64
+            /usr/local/lib
+            /usr/local/lib/${CMAKE_LIBRARY_ARCHITECTURE}
+            /usr/X11R6/lib
+        DOCS
+            "The GLFW library"
+    )
 endif()
 
 include(FindPackageHandleStandardArgs)

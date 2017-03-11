@@ -72,6 +72,15 @@ if (WIN32)
                     "The GLFW library"
             )
         endif ()
+    else()
+        find_library (GLFW_LIBRARIES
+            NAMES
+                glfw3
+            PATHS
+                "${GLFW_ROOT}/lib"
+            DOCS
+                "The GLFW library"
+        )
     endif()
 else ()
     find_library (GLFW_LIBRARIES

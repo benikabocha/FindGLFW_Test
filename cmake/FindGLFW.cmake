@@ -100,6 +100,13 @@ else ()
         DOCS
             "The GLFW library"
     )
+    if (APPLE)
+        list (APPEND GLFW_LIBRARIES
+            "-framework Cocoa"
+            "-framework CoreVideo"
+            "-framework IOKit"
+        )
+    endif ()
 endif()
 
 include(FindPackageHandleStandardArgs)

@@ -1,0 +1,44 @@
+version: 0.0.1.{build}
+image:
+- Visual Studio 2017
+- Visual Studio 2015
+environment:
+  GLFW_URL: https://github.com/glfw/glfw.git
+  GLFW_ROOT: c:\projects\dep\glfw
+  GLFW_TAG: 3.2.1
+install:
+- ps: >-
+    $GEN=""
+
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") { $GEN="Visual Studio 14 2015 Win64"}
+
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") { $GEN="Visual Studio 15 2017 Win64"}
+
+
+    if (-Not (Test-Path $env:GLFW_ROOT)) {
+        git clone --depth 1 -b $env:GLFW_TAG $env:GLFW_URL
+        cd glfw
+        mkdir build
+        cd build
+        cmake -G $GEN -D GLFW_INSTALL=ON -D GLFW_BUILD_EXAMPLES=OFF -D GLFW_BUILD_DOCS=OFF -D GLFW_BUILD_TESTS=OFF -D CMAKE_INSTALL_PREFIX=$env:GLFW_ROOT ..
+        cmake --build . --config Release --target ALL_BUILD
+        cmake --build . --config Release --target INSTALL
+        cd $env:APPVEYOR_BUILD_FOLDER
+    }
+cache: c:\projects\dep\glfw
+build_script:
+- ps: >-
+    $GEN=""
+
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") { $GEN="Visual Studio 14 2015 Win64"}
+
+    if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") { $GEN="Visual Studio 15 2017 Win64"}
+
+
+    mkdir build
+
+    cd build
+
+    cmake -G $GEN -D FindGLFW_Test_GLFW_ROOT=$env:GLFW_ROOT ..
+
+    cmake --build . --config Release --target ALL_BUILD

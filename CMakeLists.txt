@@ -1,6 +1,13 @@
 project (FindGLFW_Test)
 
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.2)
+
+if (WIN32)
+    message (STATUS "MSVC11=${MSVC11}")
+    message (STATUS "MSVC12=${MSVC11}")
+    message (STATUS "MSVC14=${MSVC14}")
+    message (STATUS "MSVC_VERSION=${MSVC_VERSION}")
+endif ()
 
 set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 

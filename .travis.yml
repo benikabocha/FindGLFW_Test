@@ -16,8 +16,6 @@ matrix:
             - g++-6
             - cmake
             - cmake-data
-            - libbullet-dev
-            - freeglut3-dev
             - libglu1-mesa-dev
             - libx11-dev
             - libxxf86vm-dev
@@ -40,8 +38,6 @@ matrix:
             - clang-3.9
             - cmake
             - cmake-data
-            - libbullet-dev
-            - freeglut3-dev
             - libglu1-mesa-dev
             - libx11-dev
             - libxxf86vm-dev
